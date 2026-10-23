@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Virtual Production | REAL Bangkok</title>
+  <meta name="description" id="metaDesc" content="ผลงาน Virtual Production ของ REAL Bangkok — LED Volume, In-Camera VFX, Music Video, โฆษณา และไลฟ์ พร้อมภาพเบื้องหลังการถ่ายทำ">
+  <script>
+    // ลิงก์เก่าของ LED Wall Configurator (index.html#<state>) → ย้ายไปหน้าใหม่
+    if (location.hash.length > 40) location.replace('/th/led-wall.html' + location.search + location.hash);
+    // วิดีโอโลโก้เปิดเว็บ: เล่นครั้งแรกของแต่ละ session, ข้ามเมื่อลิงก์ตรงไปยังส่วนใด หรือผู้ใช้ตั้งลดภาพเคลื่อนไหว
+    (function () {
+      var seen = false;
+      try { seen = sessionStorage.getItem('intro-seen') === '1'; } catch (e) { /* ignore */ }
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!seen && !reduce && !location.hash) document.documentElement.classList.add('intro-on');
+    })();
+  </script>
+  <link rel="icon" href="/logo/Asset 1 (1).png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;500;600;700&family=Kanit:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+<body class="home">
+  <!-- ============ LOGO INTRO ============ -->
+  <div class="intro" id="intro" aria-label="REAL Bangkok">
+    <video id="introVid" muted playsinline preload="auto">
+      <source src="/images/intro/logo-intro.mp4" type="video/mp4">
+    </video>
+    <div class="intro-ui">
+      <button type="button" id="introSound" aria-pressed="false">♪ Sound off</button>
+      <button type="button" id="introSkip">Skip ›</button>
+    </div>
+    <div class="intro-bar" aria-hidden="true"><i id="introBar"></i></div>
+  </div>
+  <header class="topbar">
+    <a href="/th/index.html"><img class="brand" src="/logo/REAL-bangkok3.jpg" alt="REAL Bangkok"></a>
+    <nav class="nav">
+      <a href="/th/photos.html" data-i18n="nav.photos">ภาพเบื้องหลัง</a>
+      <a href="/th/vp-sim.html" data-i18n="nav.sim">จำลองการถ่ายทำ</a>
+      <a href="/th/led-wall.html" class="nav-tool" data-i18n="nav.tool">LED Wall Configurator</a>
+    </nav>
+    <div class="sys-clock" aria-hidden="true">SYS_TIME<b id="sysClock">--:--:--</b>BKK UTC+7</div>
+    <div class="seg lang" id="langSeg" role="group" aria-label="ภาษา">
+      <button type="button" data-v="th" lang="th" data-href="/th/index.html" aria-pressed="true">TH</button>
+      <button type="button" data-v="en" lang="en" data-href="/index.html" aria-pressed="false">EN</button>
+      <button type="button" data-v="ja" lang="ja" data-href="/ja/index.html" aria-pressed="false">JP</button>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero-vp" id="top">
+    <div class="hero-rail" aria-hidden="true">
+      <div class="dots"><i></i><i></i><i></i><i></i></div>
+      <span class="vert">Virtual Production · LED Volume</span>
+      <span class="yr">2021—2025</span>
+    </div>
+    <div class="hero-stage">
+      <div class="hero-slides" id="heroSlides" aria-hidden="true">
+        <img class="on" src="/images/gallery/full/jes-3042.webp" alt="">
+        <iframe class="hero-yt" src="https://www.youtube-nocookie.com/embed/T0t3ciS3Dks?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=T0t3ciS3Dks&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;disablekb=1&amp;iv_load_policy=3" title="Behind The Production 2025" tabindex="-1" allow="autoplay; encrypted-media; picture-in-picture" frameborder="0"></iframe>
+      </div>
+      <div class="hero-hud" aria-hidden="true">
+        <span class="ring"></span>
+        <div class="tl">&gt;Rendering... <b id="hudPct">87%</b><br>ICVFX · Live</div>
+        <span class="cross c1"></span><span class="cross c2"></span>
+        <div class="br">//SCN_<span id="hudScn">01</span></div>
+      </div>
+      <div class="hero-inner">
+        <h1>Virtual<br>Production<span class="slash">/01</span></h1>
+        <p class="lead" data-i18n="hero.lead">ถ่ายทำบนเวที LED Volume ด้วย In-Camera VFX — ฉากเปลี่ยนได้ทันที แสงสะท้อนจริง จบงานได้ในกล้อง</p>
+        <div class="hero-cta">
+          <a class="btn" href="#videos"><span data-i18n="hero.cta1">ดูวิดีโอผลงาน</span><span class="arr">↗</span></a>
+          <a class="btn ghost" href="/th/photos.html"><span data-i18n="hero.cta2">ภาพเบื้องหลัง</span><span class="arr">↘</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="home-main">
+    <!-- ============ VIDEOS ============ -->
+    <section class="sec" id="videos">
+      <!-- Video mosaic: แถบชื่อ + ลิงก์ในวงเล็บ / ตารางภาพเต็มความกว้างจอ ไม่มีช่องว่าง (อ้างอิงดีไซน์ marlonlionel.ch) -->
+      <div class="vid-bar">
+        <div class="vid-read" aria-live="polite">
+          <span id="vidReadHint" data-i18n="vid.hint">ชี้ที่ภาพเพื่อดูชื่อผลงาน · คลิกเพื่อเล่น</span>
+          <span id="vidReadNow" hidden><b id="vidReadTag"></b> · <span id="vidReadTitle"></span></span>
+        </div>
+        <nav class="vid-links">
+          <a href="https://www.youtube.com/playlist?list=PLheltF9b_MaKxw93Tf2hFwQGweFtbq2q9" target="_blank" rel="noopener" data-i18n="sec.playlistLink">ดูเพลย์ลิสต์บน YouTube ↗</a>
+          <a href="https://www.youtube.com/@realbangkok7314/videos" target="_blank" rel="noopener" data-i18n="sec.channelLink">ดูช่องบน YouTube ↗</a>
+        </nav>
+      </div>
+      <div class="vid-wall" id="vidWall"></div>
+    </section>
+
+    <!-- ============ TOOL CTA ============ -->
+    <section class="tool-cta">
+      <div>
+        <h2 data-i18n="cta.title">วางแผนจอ LED สำหรับงานของคุณ</h2>
+        <p data-i18n="cta.sub">คำนวณ Pixel Pitch, จำนวนตู้, ความละเอียด และองศาความโค้งของจอ พร้อมมุมมอง 3D</p>
+      </div>
+      <div class="cta-btns">
+        <a class="btn" href="/th/led-wall.html" data-i18n="cta.btn">เปิด LED Wall Configurator →</a>
+        <a class="btn ghost" href="/th/vp-sim.html" data-i18n="cta.btn2">จำลองการถ่ายทำ →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="home-foot">
+      <img src="/logo/REAL-bangkok3.jpg" alt="REAL Bangkok">
+      <span>© REAL Bangkok · Virtual Production · Global node BKK</span>
+      <span class="barcode" aria-hidden="true"></span>
+    </div>
+    <div class="hazard" aria-hidden="true"><span>&gt; Access granted</span></div>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lb" id="lb" hidden role="dialog" aria-modal="true">
+    <button class="lb-close" id="lbClose" type="button" aria-label="Close">×</button>
+    <button class="lb-nav prev" id="lbPrev" type="button" aria-label="Previous">‹</button>
+    <div class="lb-stage" id="lbStage"></div>
+    <button class="lb-nav next" id="lbNext" type="button" aria-label="Next">›</button>
+    <div class="lb-count" id="lbCount"></div>
+  </div>
+
+  <script src="/js/home.js"></script>
+</body>
+</html>

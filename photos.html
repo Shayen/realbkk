@@ -1,30 +1,30 @@
 <!doctype html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ภาพเบื้องหลัง | REAL Bangkok</title>
-  <meta name="description" id="metaDesc" content="ผลงาน Virtual Production ของ REAL Bangkok — LED Volume, In-Camera VFX, Music Video, โฆษณา และไลฟ์ พร้อมภาพเบื้องหลังการถ่ายทำ">
-  <link rel="icon" href="logo/Asset 1 (1).png">
+  <title>Behind the Scenes | REAL Bangkok</title>
+  <meta name="description" id="metaDesc" content="REAL Bangkok virtual production work — LED volume, in-camera VFX, music videos, commercials and live shows, plus behind-the-scenes photos.">
+  <link rel="icon" href="/logo/Asset 1 (1).png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300;500;600;700&family=Kanit:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/home.css?v=2">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css?v=2">
 </head>
 <body class="home">
   <header class="topbar">
-    <a href="index.html"><img class="brand" src="logo/REAL-bangkok3.jpg" alt="REAL Bangkok"></a>
+    <a href="/index.html"><img class="brand" src="/logo/REAL-bangkok3.jpg" alt="REAL Bangkok"></a>
     <nav class="nav">
-      <a href="photos.html" aria-current="page" data-i18n="nav.photos">ภาพเบื้องหลัง</a>
-      <a href="vp-sim.html" data-i18n="nav.sim">จำลองการถ่ายทำ</a>
-      <a href="led-wall.html" class="nav-tool" data-i18n="nav.tool">LED Wall Configurator</a>
+      <a href="/photos.html" aria-current="page" data-i18n="nav.photos">Behind the scenes</a>
+      <a href="/vp-sim.html" data-i18n="nav.sim">Shoot simulator</a>
+      <a href="/led-wall.html" class="nav-tool" data-i18n="nav.tool">LED Wall Configurator</a>
     </nav>
     <div class="sys-clock" aria-hidden="true">SYS_TIME<b id="sysClock">--:--:--</b>BKK UTC+7</div>
     <div class="seg lang" id="langSeg" role="group" aria-label="Language">
-      <button type="button" data-v="th" lang="th">TH</button>
-      <button type="button" data-v="en" lang="en">EN</button>
-      <button type="button" data-v="ja" lang="ja">JP</button>
+      <button type="button" data-v="th" lang="th" data-href="/th/photos.html" aria-pressed="false">TH</button>
+      <button type="button" data-v="en" lang="en" data-href="/photos.html" aria-pressed="true">EN</button>
+      <button type="button" data-v="ja" lang="ja" data-href="/ja/photos.html" aria-pressed="false">JP</button>
     </div>
   </header>
 
@@ -40,19 +40,19 @@
         <div class="pc-aim" id="pcAim" aria-hidden="true"><i class="h"></i><i class="v"></i><span id="pcXY">0000 · 0000</span></div>
         <!-- HUD: ชื่อหน้า / ตัวกรอง / ค่าสด -->
         <div class="pc-hud">
-          <h1 class="sr-only" data-i18n="sec.photos">ภาพเบื้องหลังการถ่ายทำ</h1>
+          <h1 class="sr-only" data-i18n="sec.photos">Behind the production</h1>
           <div class="pc-filter" id="pcFilter" role="group" aria-label="Filter">
-            <button type="button" data-f="all" aria-pressed="true"><span data-i18n="f.all">ทั้งหมด</span><span class="n"></span></button>
-            <button type="button" data-f="stage" aria-pressed="false"><span data-i18n="f.stage">เวที LED</span><span class="n"></span></button>
-            <button type="button" data-f="crew" aria-pressed="false"><span data-i18n="f.crew">ทีมงาน &amp; กล้อง</span><span class="n"></span></button>
-            <button type="button" data-f="control" aria-pressed="false"><span data-i18n="f.control">ระบบควบคุม</span><span class="n"></span></button>
+            <button type="button" data-f="all" aria-pressed="true"><span data-i18n="f.all">All</span><span class="n"></span></button>
+            <button type="button" data-f="stage" aria-pressed="false"><span data-i18n="f.stage">LED stage</span><span class="n"></span></button>
+            <button type="button" data-f="crew" aria-pressed="false"><span data-i18n="f.crew">Crew &amp; camera</span><span class="n"></span></button>
+            <button type="button" data-f="control" aria-pressed="false"><span data-i18n="f.control">Control</span><span class="n"></span></button>
           </div>
           <div class="pc-read" aria-hidden="true">
             <span class="rec">REC</span><span class="auto-tag">AUTO_SCAN</span><br>
             PTS <b id="pcPts">0</b> · NODES <b id="pcNodes">0</b><br>
             CAM_TILT 45° · ICVFX
           </div>
-          <div class="pc-hint" data-i18n="pc.hint">ชี้ที่ต้นไม้เพื่อดูภาพเต็ม · คลิกเพื่อขยาย</div>
+          <div class="pc-hint" data-i18n="pc.hint">Point at a tree to reveal its photo · click to enlarge</div>
           <span class="pc-corner c1"></span><span class="pc-corner c2"></span><span class="pc-corner c3"></span><span class="pc-corner c4"></span>
         </div>
       </div>
@@ -61,7 +61,7 @@
 
   <footer>
     <div class="home-foot">
-      <img src="logo/REAL-bangkok3.jpg" alt="REAL Bangkok">
+      <img src="/logo/REAL-bangkok3.jpg" alt="REAL Bangkok">
       <span>© REAL Bangkok · Virtual Production · Global node BKK</span>
       <span class="barcode" aria-hidden="true"></span>
     </div>
@@ -79,7 +79,7 @@
     <div class="lb-strip" id="lbStrip"></div>
   </div>
 
-  <script src="js/gallery-data.js"></script>
-  <script src="js/home.js?v=2"></script>
+  <script src="/js/gallery-data.js"></script>
+  <script src="/js/home.js?v=2"></script>
 </body>
 </html>

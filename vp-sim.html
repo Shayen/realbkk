@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="th">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Virtual Production Simulator | REAL Bangkok</title>
-  <meta name="description" id="metaDesc" content="จำลองการถ่ายทำ Virtual Production — อัปโหลดภาพขึ้นจอ LED ตามขนาดจริงจาก LED Wall Configurator แล้วดูผ่านมุมกล้อง">
-  <link rel="icon" href="logo/Asset 1 (1).png">
+  <meta name="description" id="metaDesc" content="Virtual production simulator — put your image on an LED wall sized in the LED Wall Configurator and look through the camera.">
+  <link rel="icon" href="/logo/Asset 1 (1).png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Kanit:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/vp-sim.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/vp-sim.css">
   <script type="importmap">
     {
       "imports": {
@@ -22,19 +22,19 @@
 </head>
 <body>
   <header class="topbar">
-    <a href="index.html" title="หน้าหลัก"><img class="brand" src="logo/REAL-bangkok3.jpg" alt="REAL Bangkok"></a>
+    <a href="/index.html" title="Home"><img class="brand" src="/logo/REAL-bangkok3.jpg" alt="REAL Bangkok"></a>
     <div class="titles">
       <h1>Virtual Production Simulator</h1>
-      <p data-i18n="sub">จำลองการถ่ายทำบนจอ LED — ใส่ภาพ วางกล้อง แล้วดูผลผ่านเลนส์</p>
+      <p data-i18n="sub">Simulate an LED volume shoot — load an image, place the camera, see the shot</p>
     </div>
     <div class="top-actions">
       <div class="seg lang" id="langSeg" role="group" aria-label="Language">
-        <button type="button" data-v="th" lang="th">TH</button>
-        <button type="button" data-v="en" lang="en">EN</button>
-        <button type="button" data-v="ja" lang="ja">JP</button>
+        <button type="button" data-v="th" lang="th" data-href="/th/vp-sim.html" aria-pressed="false">TH</button>
+        <button type="button" data-v="en" lang="en" data-href="/vp-sim.html" aria-pressed="true">EN</button>
+        <button type="button" data-v="ja" lang="ja" data-href="/ja/vp-sim.html" aria-pressed="false">JP</button>
       </div>
-      <a class="btn ghost" id="btnConfig" href="led-wall.html" data-i18n="btn.config">LED Wall Configurator ↗</a>
-      <button class="btn" id="btnShot" type="button" data-i18n="btn.shot">บันทึกภาพจากกล้อง</button>
+      <a class="btn ghost" id="btnConfig" href="/led-wall.html" data-i18n="btn.config">LED Wall Configurator ↗</a>
+      <button class="btn" id="btnShot" type="button" data-i18n="btn.shot">Save camera frame</button>
     </div>
   </header>
 
@@ -42,51 +42,51 @@
     <!-- ============ CONTROLS ============ -->
     <aside class="panel controls">
       <section class="group">
-        <h2><span class="num">1</span> <span data-i18n="sec.wall">จอ LED</span></h2>
+        <h2><span class="num">1</span> <span data-i18n="sec.wall">LED wall</span></h2>
         <div class="wall-card" id="wallCard"></div>
         <p class="hint" id="wallSrc"></p>
         <div class="row2 gap-top">
-          <a class="btn ghost sm" id="btnEditWall" href="led-wall.html" data-i18n="btn.editWall">แก้ขนาดจอ ↗</a>
-          <button class="btn ghost sm" id="btnReloadWall" type="button" data-i18n="btn.reloadWall">โหลดค่าล่าสุด</button>
+          <a class="btn ghost sm" id="btnEditWall" href="/led-wall.html" data-i18n="btn.editWall">Edit wall size ↗</a>
+          <button class="btn ghost sm" id="btnReloadWall" type="button" data-i18n="btn.reloadWall">Load latest</button>
         </div>
       </section>
 
       <section class="group">
-        <h2><span class="num">2</span> <span data-i18n="sec.content">ภาพบนจอ</span></h2>
+        <h2><span class="num">2</span> <span data-i18n="sec.content">Wall content</span></h2>
         <label class="drop" id="drop">
           <input type="file" id="file" accept="image/*">
           <span class="drop-ico" aria-hidden="true">↥</span>
-          <span class="drop-txt" data-i18n="drop">อัปโหลดภาพ / ลากไฟล์มาวาง / วาง (Ctrl+V)</span>
+          <span class="drop-txt" data-i18n="drop">Upload image / drop a file / paste (Ctrl+V)</span>
           <span class="drop-name" id="dropName"></span>
         </label>
         <div class="chips small" id="samples">
-          <button type="button" data-s="sunset" data-i18n="s.sunset">ทะเลทรายยามเย็น</button>
-          <button type="button" data-s="forest" data-i18n="s.forest">เดินในป่า</button>
-          <button type="button" data-s="city" data-i18n="s.city">เมืองกลางคืน</button>
-          <button type="button" data-s="space" data-i18n="s.space">อวกาศ</button>
-          <button type="button" data-s="bars" data-i18n="s.bars">Test Pattern</button>
-          <button type="button" data-s="nosignal" data-i18n="s.nosignal">No Signal</button>
+          <button type="button" data-s="sunset" data-i18n="s.sunset">Desert sunset</button>
+          <button type="button" data-s="forest" data-i18n="s.forest">Forest walk</button>
+          <button type="button" data-s="city" data-i18n="s.city">Night city</button>
+          <button type="button" data-s="space" data-i18n="s.space">Space</button>
+          <button type="button" data-s="bars" data-i18n="s.bars">Test pattern</button>
+          <button type="button" data-s="nosignal" data-i18n="s.nosignal">No signal</button>
         </div>
         <label class="field">
-          <span data-i18n="f.fit">การวางภาพ</span>
+          <span data-i18n="f.fit">Image fit</span>
           <div class="seg three" id="fitSeg">
-            <button type="button" data-v="cover" data-i18n="fit.cover">เต็มจอ (ครอป)</button>
-            <button type="button" data-v="contain" data-i18n="fit.contain">พอดีภาพ</button>
-            <button type="button" data-v="stretch" data-i18n="fit.stretch">ยืดเต็มจอ</button>
+            <button type="button" data-v="cover" data-i18n="fit.cover">Fill (crop)</button>
+            <button type="button" data-v="contain" data-i18n="fit.contain">Fit</button>
+            <button type="button" data-v="stretch" data-i18n="fit.stretch">Stretch</button>
           </div>
         </label>
         <label class="field">
-          <span data-i18n="f.bright">ความสว่างจอ</span>
+          <span data-i18n="f.bright">Wall brightness</span>
           <div class="range-row"><input type="range" id="bright" min="20" max="150" step="1"><output id="brightOut" class="unit"></output><span></span></div>
         </label>
-        <label class="check"><input type="checkbox" id="seams"> <span data-i18n="f.seams">แสดงรอยต่อตู้</span></label>
-        <label class="check"><input type="checkbox" id="pixelTrue"> <span data-i18n="f.pixelTrue">แสดงผลตามความละเอียดจริงของจอ (เห็นพิกเซลเมื่อซูมใกล้)</span></label>
+        <label class="check"><input type="checkbox" id="seams"> <span data-i18n="f.seams">Show cabinet seams</span></label>
+        <label class="check"><input type="checkbox" id="pixelTrue"> <span data-i18n="f.pixelTrue">Sharp LED pixels (see individual pixels up close)</span></label>
       </section>
 
       <section class="group">
-        <h2><span class="num">3</span> <span data-i18n="sec.camera">กล้อง</span></h2>
+        <h2><span class="num">3</span> <span data-i18n="sec.camera">Camera</span></h2>
         <label class="field">
-          <span data-i18n="f.lens">เลนส์ (mm)</span>
+          <span data-i18n="f.lens">Lens (mm)</span>
           <div class="range-row"><input type="range" id="lensRange" min="12" max="200" step="1"><input type="number" id="lens" min="8" max="400" step="1"><span class="unit">mm</span></div>
         </label>
         <div class="chips small" id="lensPresets">
@@ -98,15 +98,15 @@
           <button type="button" data-l="135">135</button>
         </div>
         <label class="field">
-          <span data-i18n="f.sensor">เซนเซอร์</span>
+          <span data-i18n="f.sensor">Sensor</span>
           <select id="sensor"></select>
         </label>
         <div class="row2">
-          <label class="field"><span data-i18n="f.camDist">ระยะกล้อง–จอ (m)</span><input type="number" id="camDist" min="0.5" max="60" step="0.1"></label>
-          <label class="field"><span data-i18n="f.camH">ความสูงกล้อง (m)</span><input type="number" id="camH" min="0.1" max="15" step="0.05"></label>
+          <label class="field"><span data-i18n="f.camDist">Camera–wall (m)</span><input type="number" id="camDist" min="0.5" max="60" step="0.1"></label>
+          <label class="field"><span data-i18n="f.camH">Camera height (m)</span><input type="number" id="camH" min="0.1" max="15" step="0.05"></label>
         </div>
         <div class="row2">
-          <label class="field"><span data-i18n="f.camX">เลื่อนซ้าย–ขวา (m)</span><input type="number" id="camX" min="-50" max="50" step="0.1"></label>
+          <label class="field"><span data-i18n="f.camX">Truck left/right (m)</span><input type="number" id="camX" min="-50" max="50" step="0.1"></label>
           <label class="field"><span data-i18n="f.pan">Pan (°)</span><input type="number" id="pan" min="-90" max="90" step="0.5"></label>
         </div>
         <label class="field">
@@ -116,11 +116,11 @@
       </section>
 
       <section class="group">
-        <h2><span class="num">4</span> <span data-i18n="sec.set">นักแสดง &amp; ฉาก</span></h2>
-        <label class="check"><input type="checkbox" id="talent"> <span data-i18n="f.talent">แสดงนักแสดง (สูง 1.75 m)</span></label>
-        <label class="field"><span data-i18n="f.talentDist">ระยะนักแสดง–จอ (m)</span><input type="number" id="talentDist" min="0.3" max="40" step="0.1"></label>
-        <label class="check"><input type="checkbox" id="reflect"> <span data-i18n="f.reflect">พื้นสะท้อนเงา</span></label>
-        <label class="check"><input type="checkbox" id="frustum"> <span data-i18n="f.frustum">แสดงกรอบมุมมองกล้อง (Frustum)</span></label>
+        <h2><span class="num">4</span> <span data-i18n="sec.set">Talent &amp; set</span></h2>
+        <label class="check"><input type="checkbox" id="talent"> <span data-i18n="f.talent">Show talent (1.75 m)</span></label>
+        <label class="field"><span data-i18n="f.talentDist">Talent–wall (m)</span><input type="number" id="talentDist" min="0.3" max="40" step="0.1"></label>
+        <label class="check"><input type="checkbox" id="reflect"> <span data-i18n="f.reflect">Reflective floor</span></label>
+        <label class="check"><input type="checkbox" id="frustum"> <span data-i18n="f.frustum">Show camera frustum</span></label>
       </section>
     </aside>
 
@@ -129,10 +129,10 @@
       <div class="panel viewer">
         <div class="viewer-head">
           <div class="seg tabs" id="viewTabs">
-            <button type="button" data-v="studio" data-i18n="view.studio">สตูดิโอ 3D</button>
-            <button type="button" data-v="camera" data-i18n="view.camera">มุมกล้อง</button>
+            <button type="button" data-v="studio" data-i18n="view.studio">Studio 3D</button>
+            <button type="button" data-v="camera" data-i18n="view.camera">Camera view</button>
           </div>
-          <span class="viewer-hint" id="viewerHint" data-i18n="view.hint">ลากเพื่อหมุน · คลิกขวาลากเพื่อเลื่อน · ลูกกลิ้งซูม</span>
+          <span class="viewer-hint" id="viewerHint" data-i18n="view.hint">Drag to orbit · right-drag to pan · wheel to zoom</span>
         </div>
         <div class="canvas-wrap sim-wrap" id="simWrap">
           <canvas id="sim"></canvas>
@@ -147,25 +147,25 @@
             <i class="thirds" aria-hidden="true"></i>
           </div>
           <div class="hud" id="hud"></div>
-          <div class="drop-overlay" id="dropOverlay" data-i18n="dropHere">วางภาพเพื่อแสดงบนจอ</div>
+          <div class="drop-overlay" id="dropOverlay" data-i18n="dropHere">Drop image to show on the wall</div>
           <div class="sim-error" id="simError" hidden></div>
         </div>
       </div>
 
       <div class="stats" id="stats"></div>
-      <p class="foot" data-i18n="foot">ภาพจำลองเพื่อวางแผนเบื้องต้น — แสง สี และมุมมองจริงขึ้นกับกล้อง เลนส์ และระบบ tracking หน้างาน</p>
+      <p class="foot" data-i18n="foot">Planning preview only — real light, colour and framing depend on the camera, lens and on-set tracking.</p>
     </section>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="js/vp-sim.js"></script>
+  <script type="module" src="/js/vp-sim.js"></script>
   <script>
     // ถ้าโหลดไลบรารี 3D ไม่สำเร็จ (ออฟไลน์/CDN ถูกบล็อก) ให้แจ้งแทนจอว่าง
     setTimeout(function () {
       if (window.__vpReady) return;
       var el = document.getElementById('simError');
       el.hidden = false;
-      el.textContent = 'โหลดไลบรารี 3D ไม่สำเร็จ — ตรวจสอบอินเทอร์เน็ต / 3D library failed to load';
+      el.textContent = '3D library failed to load — check your internet connection.';
     }, 10000);
   </script>
 </body>

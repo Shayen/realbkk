@@ -141,12 +141,7 @@ const T = {
   },
 };
 const LANGS = ['th', 'en', 'ja'];
-let LANG = (() => {
-  const q = new URLSearchParams(location.search).get('lang');
-  if (LANGS.includes(q)) return q;
-  try { const v = localStorage.getItem('ledwall-lang'); if (LANGS.includes(v)) return v; } catch (e) { /* ignore */ }
-  return 'th';
-})();
+let LANG = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'en';
 function t(key, ...args) {
   const v = T[LANG][key] ?? T.th[key];
   if (v === undefined) return key;
@@ -979,8 +974,8 @@ async function loadTalentGif(url) {
   drawGifFrame();
   invalidate();
 }
-loadTalentGif('1587.gif').catch(() => { /* ไม่มีไฟล์: ไม่แสดงนักแสดง */ });
-decodeGif('1885.gif').then(({ frames, durations }) => {
+loadTalentGif('/1587.gif').catch(() => { /* ไม่มีไฟล์: ไม่แสดงนักแสดง */ });
+decodeGif('/1885.gif').then(({ frames, durations }) => {
   Object.assign(wallActor, { frames, durations, i: 0, next: performance.now() + durations[0] });
 }).catch(() => { /* ไม่มีไฟล์: ฉากป่าไม่มีสัตว์ */ });
 
@@ -1208,12 +1203,17 @@ function snapshot() {
 
 /* ================= UI ================= */
 function applyLang() {
-  document.documentElement.lang = LANG;
   document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
   $('metaDesc').content = t('meta.desc');
   setSeg('langSeg', LANG);
 }
-function setSeg(id, v) { document.querySelectorAll(`#${id} button`).forEach((b) => b.classList.toggle('on', b.dataset.v === v)); }
+function setSeg(id, v) {
+  document.querySelectorAll(`#${id} button`).forEach((b) => {
+    const selected = b.dataset.v === v;
+    b.classList.toggle('on', selected);
+    if (id === 'langSeg') b.setAttribute('aria-pressed', String(selected));
+  });
+}
 
 function syncInputs() {
   setSeg('fitSeg', P.fit); setSeg('viewTabs', P.view);
@@ -1299,9 +1299,7 @@ function bind() {
 
   $('langSeg').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b || b.dataset.v === LANG) return;
-    LANG = b.dataset.v;
-    try { localStorage.setItem('ledwall-lang', LANG); } catch (err) { /* ignore */ }
-    applyLang(); renderWallCard(); renderStats();
+    if (b.dataset.href) location.href = b.dataset.href + location.hash;
   });
   $('viewTabs').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;

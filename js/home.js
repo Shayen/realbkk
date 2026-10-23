@@ -98,26 +98,22 @@
     },
   };
   const LANGS = ['th', 'en', 'ja'];
-  let LANG = (() => {
-    const q = new URLSearchParams(location.search).get('lang');
-    if (LANGS.includes(q)) return q;
-    try { const v = localStorage.getItem('ledwall-lang'); if (LANGS.includes(v)) return v; } catch (e) { /* ignore */ }
-    return 'th';
-  })();
+  let LANG = LANGS.includes(document.documentElement.lang) ? document.documentElement.lang : 'en';
   const t = (k) => T[LANG][k] ?? T.th[k];
 
   function applyLang() {
-    document.documentElement.lang = LANG;
     $('metaDesc').content = t('meta.desc');
     document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
-    document.querySelectorAll('#langSeg button').forEach((b) => b.classList.toggle('on', b.dataset.v === LANG));
+    document.querySelectorAll('#langSeg button').forEach((b) => {
+      const selected = b.dataset.v === LANG;
+      b.classList.toggle('on', selected);
+      b.setAttribute('aria-pressed', String(selected));
+    });
     document.querySelectorAll('.ph img').forEach((img) => { img.alt = t('alt.' + img.dataset.cat); });
   }
   $('langSeg').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b || b.dataset.v === LANG) return;
-    LANG = b.dataset.v;
-    try { localStorage.setItem('ledwall-lang', LANG); } catch (err) { /* ignore */ }
-    applyLang();
+    if (b.dataset.href) location.href = b.dataset.href + location.hash;
   });
 
   /* ================= HERO VIDEO (Behind The Production 2025 — YouTube พื้นหลัง) ================= */
@@ -205,7 +201,7 @@
       b.dataset.cat = p.cat;
       const img = document.createElement('img');
       img.dataset.cat = p.cat;
-      img.dataset.src = `images/gallery/thumb/${p.id}.webp`;
+      img.dataset.src = `/images/gallery/thumb/${p.id}.webp`;
       img.decoding = 'async';
       img.draggable = false;
       img.onload = () => { img.classList.add('ld'); sample(p); };
@@ -517,7 +513,7 @@
     actEl.draggable = false;
     actEl.onload = () => { actor.on = true; };
     actEl.onerror = () => actEl.remove();
-    actEl.src = '1885.gif';
+    actEl.src = '/1885.gif';
     cvs.after(actEl);
 
     // ระยะห่างจากต้นไม้ที่ใกล้ที่สุด (ลบด้วยรัศมีที่ต้องเว้น)
@@ -695,7 +691,7 @@
     lbIdx = (i + visible.length) % visible.length;
     const p = visible[lbIdx];
     const img = new Image();
-    img.src = `images/gallery/full/${p.id}.webp`;
+    img.src = `/images/gallery/full/${p.id}.webp`;
     img.alt = t('alt.' + p.cat);
     stage.replaceChildren(img);
     $('lbCount').textContent = `${lbIdx + 1} / ${visible.length}`;
@@ -712,7 +708,7 @@
     }
     // โหลดรูปถัดไปล่วงหน้า
     const nx = visible[(lbIdx + 1) % visible.length];
-    if (nx) new Image().src = `images/gallery/full/${nx.id}.webp`;
+    if (nx) new Image().src = `/images/gallery/full/${nx.id}.webp`;
   }
   // แถบฟิล์มภาพย่อใต้ lightbox (เฉพาะหน้า photos.html)
   const lbCap = $('lbCap'), lbStrip = $('lbStrip');
@@ -723,7 +719,7 @@
         b.type = 'button';
         b.setAttribute('aria-label', `${scn(p)} (${k + 1} / ${visible.length})`);
         const im = new Image();
-        im.src = `images/gallery/thumb/${p.id}.webp`;
+        im.src = `/images/gallery/thumb/${p.id}.webp`;
         im.alt = '';
         b.appendChild(im);
         b.addEventListener('click', () => showPhoto(k));
