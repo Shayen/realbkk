@@ -119,7 +119,7 @@
 **Files:**
 - Modify: all 12 HTML pages
 - Modify: `js/home.js` only if required to give meaningful gallery images localized alt text
-- Modify: `README.md`
+- Create: `README.md`
 - Modify: `tests/test_discoverability.py`
 
 **Interfaces:**
@@ -159,4 +159,4 @@
 
 ## Execution note
 
-The current workspace is not a Git checkout. Do not attempt commits here; apply this plan in a clone or other Git worktree before implementation if commits or a PR are required.
+Run implementation in an isolated Git worktree. Commit each task separately and do not push or open a pull request without explicit authorization.
