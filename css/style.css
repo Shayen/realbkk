@@ -146,6 +146,11 @@ button, input, select { font: inherit; color: inherit; }
   background-repeat: no-repeat;
   z-index: 1;
 }
+.layout > .faq { grid-column: 1 / -1; }
+.faq h2 { margin: 0 0 12px; font-size: 15px; }
+.faq details + details { border-top: 1px dashed var(--line2); }
+.faq summary { cursor: pointer; padding: 10px 0; font-weight: 600; }
+.faq p { margin: 0 0 12px; color: var(--muted); font-size: 13px; line-height: 1.6; }
 .controls {
   padding: 6px 18px 12px;
   align-self: start;

@@ -49,6 +49,10 @@
   <main class="home-main">
     <!-- ============ PHOTOS ============ -->
     <section class="sec" id="photos">
+      <div class="sec-head">
+        <h1 data-i18n="sec.photos">撮影の舞台裏</h1>
+        <p class="page-summary" lang="ja" data-i18n="sec.photosSub">舞台裏から、LEDステージ、制作スタッフ、現場のコントロールシステムをご覧いただけます。</p>
+      </div>
       <!-- Point cloud forest: แต่ละภาพ = ต้นไม้ 1 ต้น / ชี้ที่ต้นไม้ = ภาพเต็ม / คลิกเพื่อขยาย -->
       <div class="pc" id="pc">
         <canvas class="pc-canvas" id="pcCanvas" aria-hidden="true"></canvas>
@@ -58,7 +62,6 @@
         <div class="pc-aim" id="pcAim" aria-hidden="true"><i class="h"></i><i class="v"></i><span id="pcXY">0000 · 0000</span></div>
         <!-- HUD: ชื่อหน้า / ตัวกรอง / ค่าสด -->
         <div class="pc-hud">
-          <h1 class="sr-only" data-i18n="sec.photos">撮影の舞台裏</h1>
           <div class="pc-filter" id="pcFilter" role="group" aria-label="Filter">
             <button type="button" data-f="all" aria-pressed="true"><span data-i18n="f.all">すべて</span><span class="n"></span></button>
             <button type="button" data-f="stage" aria-pressed="false"><span data-i18n="f.stage">LEDステージ</span><span class="n"></span></button>

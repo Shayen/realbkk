@@ -48,7 +48,7 @@
       'sec.playlistLink': 'ดูเพลย์ลิสต์บน YouTube ↗',
       'sec.channelLink': 'ดูช่องบน YouTube ↗',
       'vid.hint': 'ชี้ที่ภาพเพื่อดูชื่อผลงาน · คลิกเพื่อเล่น',
-      'sec.photos': 'ภาพเบื้องหลังการถ่ายทำ', 'sec.photosSub': 'Behind The Production — เวที LED, ทีมงาน และระบบควบคุมหน้างาน',
+      'sec.photos': 'ภาพเบื้องหลังการถ่ายทำ', 'sec.photosSub': 'ชมเบื้องหลังเวที LED ทีมงาน และระบบควบคุมในการถ่ายทำ',
       'f.all': 'ทั้งหมด', 'f.stage': 'เวที LED', 'f.crew': 'ทีมงาน & กล้อง', 'f.control': 'ระบบควบคุม',
       'pc.hint': 'ชี้ที่ต้นไม้เพื่อดูภาพเต็ม · คลิกเพื่อขยาย',
       'cta.title': 'วางแผนจอ LED สำหรับงานของคุณ',
@@ -201,6 +201,7 @@
       b.dataset.cat = p.cat;
       const img = document.createElement('img');
       img.dataset.cat = p.cat;
+      img.alt = t('alt.' + p.cat);
       img.dataset.src = `/images/gallery/thumb/${p.id}.webp`;
       img.decoding = 'async';
       img.draggable = false;

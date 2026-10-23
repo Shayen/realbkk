@@ -134,7 +134,7 @@ html { scroll-behavior: smooth; }
 .sec-head { display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: baseline; margin-bottom: 28px; }
 .sec-num { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 1px; }
 .sec-num::before { content: "/"; }
-.sec-head h2 { margin: 0; font-family: var(--head); font-weight: 700; font-size: clamp(26px, 3.4vw, 42px); line-height: 1.1; text-transform: uppercase; letter-spacing: -.5px; }
+.sec-head h1, .sec-head h2 { margin: 0; font-family: var(--head); font-weight: 700; font-size: clamp(26px, 3.4vw, 42px); line-height: 1.1; text-transform: uppercase; letter-spacing: -.5px; }
 .sec-head p { grid-column: 2; margin: 8px 0 0; color: var(--muted); font-size: 14px; }
 /* ---------- Video mosaic: แถบชื่อ + [ ลิงก์ ] / ตารางภาพเต็มจอ ชิดกัน ---------- */
 body.home { overflow-x: clip; }

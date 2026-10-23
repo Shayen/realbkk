@@ -1,5 +1,6 @@
 import html
 import json
+import re
 import unittest
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
@@ -26,15 +27,46 @@ class DocumentParser(HTMLParser):
         self.meta = []
         self.links = []
         self.jsonld_blocks = []
+        self.headings = []
+        self.summaries = []
+        self.adjacent_summaries = 0
+        self.faq_sections = 0
+        self.faq_details = []
+        self.faqs = []
+        self.images = []
         self._in_title = False
         self._jsonld_data = None
+        self._in_heading = False
+        self._heading_text = []
+        self._after_heading = False
+        self._summary = None
+        self._faq_active = False
+        self._faq_capture = None
 
     def handle_starttag(self, tag, attrs):
         attributes = dict(attrs)
+        if self._after_heading:
+            if tag == "p" and "page-summary" in attributes.get("class", "").split():
+                self.adjacent_summaries += 1
+            self._after_heading = False
         if tag == "html":
             self.document_language = attributes.get("lang")
         if tag == "title":
             self._in_title = True
+        if tag == "h1":
+            self._in_heading = True
+            self._heading_text = []
+        if tag == "img":
+            self.images.append(attributes)
+        if tag == "p" and "page-summary" in attributes.get("class", "").split():
+            self._summary = {"attributes": attributes, "text": []}
+        if tag == "section" and "faq" in attributes.get("class", "").split():
+            self.faq_sections += 1
+            self._faq_active = True
+        if self._faq_active and tag == "details":
+            self.faq_details.append(attributes)
+        if self._faq_active and tag in ("summary", "p"):
+            self._faq_capture = {"tag": tag, "text": []}
         if tag == "meta":
             self.meta.append(attributes)
         if tag == "link":
@@ -53,6 +85,12 @@ class DocumentParser(HTMLParser):
     def handle_data(self, data):
         if self._in_title:
             self.title.append(data)
+        if self._in_heading:
+            self._heading_text.append(data)
+        if self._summary is not None:
+            self._summary["text"].append(data)
+        if self._faq_capture is not None:
+            self._faq_capture["text"].append(data)
         if self._jsonld_data is not None:
             self._jsonld_data.append(data)
 
@@ -62,6 +100,24 @@ class DocumentParser(HTMLParser):
         if tag == "script" and self._jsonld_data is not None:
             self.jsonld_blocks.append("".join(self._jsonld_data))
             self._jsonld_data = None
+        if tag == "h1":
+            self.headings.append("".join(self._heading_text).strip())
+            self._in_heading = False
+            self._after_heading = True
+        if tag == "p" and self._summary is not None:
+            self._summary["text"] = "".join(self._summary["text"]).strip()
+            self.summaries.append(self._summary)
+            self._summary = None
+        if tag in ("summary", "p") and self._faq_capture is not None:
+            if self._faq_capture["tag"] == tag:
+                self.faq_capture_text = "".join(self._faq_capture["text"]).strip()
+                if tag == "summary":
+                    self._current_question = self.faq_capture_text
+                else:
+                    self.faqs.append((getattr(self, "_current_question", ""), self.faq_capture_text))
+                self._faq_capture = None
+        if tag == "section" and self._faq_active:
+            self._faq_active = False
 
 
 def route_path(locale, page_type):
@@ -87,6 +143,107 @@ def parse_page(path):
 
 
 class DiscoverabilityTests(unittest.TestCase):
+    def test_each_page_has_a_visible_localized_summary(self):
+        summaries_by_page = {page_type: [] for page_type in PAGE_TYPES}
+        simulator_script = (ROOT / "js/vp-sim.js").read_text(encoding="utf-8")
+        for locale in LOCALES:
+            for page_type in PAGE_TYPES:
+                route = ROOT / (page_type if locale == "en" else f"{locale}/{page_type}")
+                with self.subTest(locale=locale, page=page_type):
+                    parser = parse_page(route)
+                    self.assertEqual(len(parser.headings), 1, "Each page must have one main heading")
+                    self.assertEqual(len(parser.summaries), 1, "Each page must have one adjacent summary")
+                    self.assertEqual(parser.adjacent_summaries, 1)
+                    summary = parser.summaries[0]
+                    self.assertTrue(summary["text"], "Summary must not be empty")
+                    self.assertEqual(summary["attributes"].get("lang"), locale)
+                    self.assertNotIn("hidden", summary["attributes"])
+                    self.assertNotIn("sr-only", summary["attributes"].get("class", "").split())
+                    if page_type == "vp-sim.html":
+                        locale_block = re.search(
+                            rf"(?ms)^\s{{2}}{locale}: \{{(.*?)(?=^\s{{2}}(?:th|en|ja): \{{|^\s*\}};)",
+                            simulator_script,
+                        )
+                        self.assertIsNotNone(locale_block, f"Missing {locale} simulator translations")
+                        self.assertRegex(
+                            locale_block.group(1),
+                            r"'page\.simSummary':\s*'[^']+'",
+                            f"Missing {locale} simulator summary translation",
+                        )
+                    summaries_by_page[page_type].append(summary["text"])
+        for page_type, summaries in summaries_by_page.items():
+            self.assertEqual(len(summaries), len(set(summaries)), f"{page_type} summaries must be localized")
+
+    def test_tool_faq_markup_matches_visible_questions_and_answers(self):
+        tool_pages = {"led-wall.html", "vp-sim.html"}
+        for locale in LOCALES:
+            for page_type in PAGE_TYPES:
+                route = ROOT / (page_type if locale == "en" else f"{locale}/{page_type}")
+                with self.subTest(locale=locale, page=page_type):
+                    parser = parse_page(route)
+                    expected_sections = int(page_type in tool_pages)
+                    self.assertEqual(parser.faq_sections, expected_sections)
+                    if not expected_sections:
+                        self.assertEqual(parser.faqs, [])
+                        self.assertEqual(parser.faq_details, [])
+                        continue
+                    self.assertGreaterEqual(len(parser.faqs), 2)
+                    self.assertTrue(all("open" in details for details in parser.faq_details))
+                    self.assertTrue(all(question and answer for question, answer in parser.faqs))
+                    for block in parser.jsonld_blocks:
+                        parsed = json.loads(block)
+                        entities = parsed.get("@graph", [parsed])
+                        for entity in entities:
+                            if entity.get("@type") != "FAQPage":
+                                continue
+                            structured_faqs = [
+                                (
+                                    item.get("name", "").strip(),
+                                    item.get("acceptedAnswer", {}).get("text", "").strip(),
+                                )
+                                for item in entity.get("mainEntity", [])
+                            ]
+                            self.assertEqual(structured_faqs, parser.faqs)
+
+    def test_informative_images_have_alt_text(self):
+        home_script = (ROOT / "js/home.js").read_text(encoding="utf-8")
+        self.assertIn("img.alt = t('alt.' + img.dataset.cat)", home_script)
+        self.assertIn("img.alt = t('alt.' + p.cat)", home_script)
+        self.assertIsNotNone(
+            re.search(
+                r"img\.dataset\.cat = p\.cat;\s*img\.alt = t\('alt\.' \+ p\.cat\);",
+                home_script,
+            ),
+            "Gallery thumbnails must receive localized alt text when created",
+        )
+        for locale in LOCALES:
+            with self.subTest(locale=locale):
+                locale_block = re.search(
+                    rf"(?ms)^\s*{locale}: \{{(.*?)(?=^\s*(?:th|en|ja): \{{|^\s*\}};)",
+                    home_script,
+                )
+                self.assertIsNotNone(locale_block, f"Missing {locale} gallery translations")
+                for category in ("stage", "crew", "control"):
+                    self.assertRegex(
+                        locale_block.group(1),
+                        rf"'alt\.{category}':\s*'[^']+'",
+                        f"Missing localized {category} image description",
+                    )
+
+        for locale in LOCALES:
+            for page_type in PAGE_TYPES:
+                route = ROOT / (page_type if locale == "en" else f"{locale}/{page_type}")
+                with self.subTest(locale=locale, page=page_type):
+                    for image in parse_page(route).images:
+                        self.assertIn("alt", image, f"Every image needs explicit alt text: {route}")
+                        if image.get("alt") == "":
+                            if page_type == "index.html":
+                                self.assertEqual(image.get("class"), "on", "Only the decorative hero image is empty-alt")
+                            elif page_type == "photos.html":
+                                self.assertNotIn("src", image, "The empty-alt photo image is a dynamic reveal placeholder")
+                            else:
+                                self.fail(f"Informative image must have a description: {route}")
+
     def test_each_page_has_one_localized_title_description_and_canonical(self):
         titles = []
         descriptions = []

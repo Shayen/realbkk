@@ -3,6 +3,7 @@ window.I18N = {
   th: {
     'meta.desc': 'คำนวณขนาด LED Wall — ปรับ Pixel Pitch, ขนาดตู้, จำนวนตู้, องศาการต่อจอ พร้อมแสดงความละเอียดพิกเซลและขนาดจอ',
     sub: 'ออกแบบและคำนวณขนาดจอ LED — ปรับ Pitch · ขนาด · องศาการต่อจอ',
+    'page.ledWallSummary': 'กำหนด Pixel Pitch รุ่นและขนาดตู้ ขนาดจอ และองศาข้อต่อ เพื่อดูขนาดกับความละเอียดของจอ',
     'btn.sim': 'จำลองการถ่ายทำ ↗', 'btn.reset': 'รีเซ็ต', 'btn.link': 'คัดลอกลิงก์', 'btn.copy': 'คัดลอกสรุป',
     'sec.cabinet': 'ขนาดตู้ (Cabinet)', 'sec.size': 'ขนาดจอ', 'sec.angle': 'องศาการต่อจอ',
     custom: 'กำหนดเอง',
@@ -78,6 +79,7 @@ window.I18N = {
   en: {
     'meta.desc': 'LED wall calculator — set pixel pitch, cabinet size, cabinet count and joint angles, with pixel resolution and screen size.',
     sub: 'Design and size your LED wall — adjust pitch · size · joint angles',
+    'page.ledWallSummary': 'Set pixel pitch, cabinet details, screen size and joint angles to preview wall dimensions and resolution.',
     'btn.sim': 'Shoot simulator ↗', 'btn.reset': 'Reset', 'btn.link': 'Copy link', 'btn.copy': 'Copy summary',
     'sec.cabinet': 'Cabinet size', 'sec.size': 'Screen size', 'sec.angle': 'Joint angles',
     custom: 'Custom',
@@ -153,6 +155,7 @@ window.I18N = {
   ja: {
     'meta.desc': 'LEDビジョンのサイズ計算 — ピクセルピッチ、キャビネットサイズ・枚数、接続角度を設定し、解像度と画面サイズを表示',
     sub: 'LEDビジョンの設計・サイズ計算 — ピッチ · サイズ · 接続角度',
+    'page.ledWallSummary': 'ピクセルピッチ、キャビネット、画面サイズ、接続角度を設定し、画面寸法と解像度を確認できます。',
     'btn.sim': '撮影シミュレーター ↗', 'btn.reset': 'リセット', 'btn.link': 'リンクをコピー', 'btn.copy': '概要をコピー',
     'sec.cabinet': 'キャビネットサイズ', 'sec.size': '画面サイズ', 'sec.angle': '接続角度',
     custom: 'カスタム',

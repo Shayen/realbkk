@@ -16,6 +16,7 @@ const T = {
   th: {
     'meta.desc': 'จำลองการถ่ายทำ Virtual Production — อัปโหลดภาพขึ้นจอ LED ตามขนาดจริงจาก LED Wall Configurator แล้วดูผ่านมุมกล้อง',
     sub: 'จำลองการถ่ายทำบนจอ LED — ใส่ภาพ วางกล้อง แล้วดูผลผ่านเลนส์',
+    'page.simSummary': 'ใช้การตั้งค่าจอ LED ที่กำหนดไว้ เพิ่มภาพ แล้วปรับค่ากล้อง เลนส์ และเซนเซอร์เพื่อดูภาพจำลอง',
     'btn.config': 'LED Wall Configurator ↗', 'btn.shot': 'บันทึกภาพจากกล้อง',
     'btn.editWall': 'แก้ขนาดจอ ↗', 'btn.reloadWall': 'โหลดค่าล่าสุด',
     'sec.wall': 'จอ LED', 'sec.content': 'ภาพบนจอ', 'sec.camera': 'กล้อง', 'sec.set': 'นักแสดง & ฉาก',
@@ -58,6 +59,7 @@ const T = {
   en: {
     'meta.desc': 'Virtual production simulator — put your image on an LED wall sized in the LED Wall Configurator and look through the camera.',
     sub: 'Simulate an LED volume shoot — load an image, place the camera, see the shot',
+    'page.simSummary': 'Load a configured LED wall and image, then adjust camera, lens and sensor settings to preview the shot.',
     'btn.config': 'LED Wall Configurator ↗', 'btn.shot': 'Save camera frame',
     'btn.editWall': 'Edit wall size ↗', 'btn.reloadWall': 'Load latest',
     'sec.wall': 'LED wall', 'sec.content': 'Wall content', 'sec.camera': 'Camera', 'sec.set': 'Talent & set',
@@ -100,6 +102,7 @@ const T = {
   ja: {
     'meta.desc': 'バーチャルプロダクション・シミュレーター — LED Wall Configurator のサイズでLEDに画像を表示し、カメラ越しに確認。',
     sub: 'LEDボリューム撮影をシミュレーション — 画像を入れ、カメラを置き、画を確認',
+    'page.simSummary': '設定済みのLEDウォールに画像を読み込み、カメラ、レンズ、センサーを調整して撮影イメージを確認できます。',
     'btn.config': 'LED Wall Configurator ↗', 'btn.shot': 'カメラ画像を保存',
     'btn.editWall': 'サイズを編集 ↗', 'btn.reloadWall': '最新を読み込む',
     'sec.wall': 'LEDウォール', 'sec.content': '表示する画像', 'sec.camera': 'カメラ', 'sec.set': '演者・セット',
