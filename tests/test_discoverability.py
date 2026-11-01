@@ -468,6 +468,65 @@ class DiscoverabilityTests(unittest.TestCase):
                         target = ROOT / parsed.path.lstrip("/")
                         self.assertTrue(target.is_file(), f"Missing linked page: {reference}")
 
+    def test_production_compose_builds_and_tags_web_image(self):
+        compose = (ROOT / "compose.yaml").read_text(encoding="utf-8")
+        service_block = compose.split("services:", maxsplit=1)[1]
+        services = re.findall(r"(?m)^  ([\w-]+):\s*$", service_block)
+
+        self.assertEqual(services, ["web"])
+        self.assertIn("image: realbkk-web:${IMAGE_TAG:-latest}", compose)
+        self.assertIn("dockerfile: Dockerfile", compose)
+        self.assertRegex(compose, r"(?m)^    expose:\s*\n      - [\"']?80[\"']?\s*$")
+        self.assertNotRegex(compose, r"(?m)^    ports:")
+
+    def test_local_compose_binds_only_loopback(self):
+        compose = (ROOT / "compose.local.yaml").read_text(encoding="utf-8")
+        self.assertIn("127.0.0.1:${WEB_PORT:-8080}:80", compose)
+
+    def test_dockerfile_copies_required_runtime_paths_only(self):
+        dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+        dockerignore = (ROOT / ".dockerignore").read_text(encoding="utf-8")
+        copy_lines = "\n".join(line for line in dockerfile.splitlines() if line.startswith("COPY "))
+
+        for path in (
+            "index.html",
+            "photos.html",
+            "led-wall.html",
+            "vp-sim.html",
+            "th/",
+            "ja/",
+            "css/",
+            "js/",
+            "images/",
+            "logo/",
+            "1587.gif",
+            "1885.gif",
+            "robots.txt",
+            "sitemap.xml",
+        ):
+            with self.subTest(path=path):
+                self.assertIn(path, copy_lines)
+
+        for path in (
+            "do_not_use/",
+            ".git/",
+            "tests/",
+            "docs/",
+            ".superpowers/",
+            ".playwright-mcp/",
+        ):
+            with self.subTest(path=path):
+                self.assertIn(path, dockerignore)
+        self.assertNotRegex(copy_lines, r"(?i)do_not_use|behind the production|REF/|IMG_7567")
+
+    def test_nginx_routes_directories_and_unknown_paths(self):
+        nginx_config = (ROOT / "nginx/default.conf").read_text(encoding="utf-8")
+        self.assertIn("root /usr/share/nginx/html;", nginx_config)
+        self.assertIn("index index.html;", nginx_config)
+        self.assertIn("server_name realbkk.com;", nginx_config)
+        self.assertIn("return 301 https://www.realbkk.com$request_uri;", nginx_config)
+        self.assertIn("try_files $uri $uri/ =404;", nginx_config)
+
 
 if __name__ == "__main__":
     unittest.main()

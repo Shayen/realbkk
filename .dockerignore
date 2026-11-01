@@ -1,0 +1,8 @@
+.git/
+.github/
+.playwright-mcp/
+.superpowers/
+do_not_use/
+docs/
+tests/
+README.md
