@@ -1,5 +1,5 @@
 /* ============================================================
-   Art style: Cyber Brutalism × monochrome editorial (ดู REF/)
+   Art style: Cyber Brutalism × monochrome editorial (ดู do_not_use/REF/)
    — ดำล้วน, เส้นกริด, มุมเหลี่ยม, ตัวอักษร mono แบบ HUD, สีเน้นเงิน (silver)
    ============================================================ */
 :root {
@@ -14,7 +14,7 @@
   --silver1: #f4f5f7;
   --silver2: #a9aeb6;
   --silver3: #5d5d5d;
-  /* โทนสีจาก REF/colorstyle.jpg — แดงเลือด + เทาเหล็กอมฟ้า + เงิน */
+  /* โทนสีจาก do_not_use/REF/colorstyle.jpg — แดงเลือด + เทาเหล็กอมฟ้า + เงิน */
   --red: #e0222b;
   --red-deep: #8c0c12;
   --red-dim: rgba(224,34,43,.16);

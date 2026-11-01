@@ -143,6 +143,38 @@ def parse_page(path):
 
 
 class DiscoverabilityTests(unittest.TestCase):
+    def test_source_and_reference_files_are_archived(self):
+        archived_paths = (
+            "do_not_use/Behind The Production 2025",
+            "do_not_use/REF",
+            "do_not_use/IMG_7567.png",
+        )
+        original_paths = ("Behind The Production 2025", "REF", "IMG_7567.png")
+
+        for path in archived_paths:
+            with self.subTest(path=path):
+                self.assertTrue((ROOT / path).exists(), f"Missing archived path: {path}")
+        for path in original_paths:
+            with self.subTest(path=path):
+                self.assertFalse((ROOT / path).exists(), f"Original path still exists: {path}")
+
+    def test_runtime_gifs_remain_at_root(self):
+        self.assertTrue((ROOT / "1587.gif").is_file())
+        self.assertTrue((ROOT / "1885.gif").is_file())
+
+        simulator_script = (ROOT / "js/vp-sim.js").read_text(encoding="utf-8")
+        home_script = (ROOT / "js/home.js").read_text(encoding="utf-8")
+        self.assertIn("loadTalentGif('/1587.gif')", simulator_script)
+        self.assertIn("decodeGif('/1885.gif')", simulator_script)
+        self.assertIn("actEl.src = '/1885.gif'", home_script)
+
+    def test_archive_comments_use_new_locations(self):
+        stylesheet = (ROOT / "css/style.css").read_text(encoding="utf-8")
+        gallery_script = (ROOT / "js/gallery-data.js").read_text(encoding="utf-8")
+        self.assertIn("do_not_use/REF/", stylesheet)
+        self.assertIn("do_not_use/REF/colorstyle.jpg", stylesheet)
+        self.assertIn("do_not_use/Behind The Production 2025", gallery_script)
+
     def test_each_page_has_a_visible_localized_summary(self):
         summaries_by_page = {page_type: [] for page_type in PAGE_TYPES}
         simulator_script = (ROOT / "js/vp-sim.js").read_text(encoding="utf-8")

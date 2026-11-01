@@ -1,5 +1,5 @@
 // [ไฟล์ใน images/gallery/{thumb,full}/<id>.webp, กว้าง, สูง (thumb), หมวด]
-// สร้างจากโฟลเดอร์ "Behind The Production 2025"
+// สร้างจากโฟลเดอร์ "do_not_use/Behind The Production 2025"
 window.GALLERY_PHOTOS = [
   ['jes-3018', 900, 601, 'stage'],
   ['1', 900, 601, 'stage'],
