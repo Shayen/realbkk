@@ -1,15 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.realbkk.com/</loc></url>
-  <url><loc>https://www.realbkk.com/photos.html</loc></url>
-  <url><loc>https://www.realbkk.com/led-wall.html</loc></url>
-  <url><loc>https://www.realbkk.com/vp-sim.html</loc></url>
-  <url><loc>https://www.realbkk.com/th/</loc></url>
-  <url><loc>https://www.realbkk.com/th/photos.html</loc></url>
-  <url><loc>https://www.realbkk.com/th/led-wall.html</loc></url>
-  <url><loc>https://www.realbkk.com/th/vp-sim.html</loc></url>
-  <url><loc>https://www.realbkk.com/ja/</loc></url>
-  <url><loc>https://www.realbkk.com/ja/photos.html</loc></url>
-  <url><loc>https://www.realbkk.com/ja/led-wall.html</loc></url>
-  <url><loc>https://www.realbkk.com/ja/vp-sim.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.realbkk.com/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/photos.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/photos.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/photos.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/photos.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/led-wall.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/led-wall.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/led-wall.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/led-wall.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/vp-sim.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/vp-sim.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/vp-sim.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/vp-sim.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/th/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/th/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/th/"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/th/photos.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/th/photos.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/th/photos.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/th/photos.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/th/led-wall.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/th/led-wall.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/th/led-wall.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/th/led-wall.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/th/vp-sim.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/th/vp-sim.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/th/vp-sim.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/th/vp-sim.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/ja/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/ja/"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/ja/photos.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/ja/photos.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/ja/photos.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/ja/photos.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/ja/led-wall.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/ja/led-wall.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/ja/led-wall.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/ja/led-wall.html"/>
+  </url>
+  <url>
+    <loc>https://www.realbkk.com/ja/vp-sim.html</loc>
+    <lastmod>2026-11-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.realbkk.com/ja/vp-sim.html"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://www.realbkk.com/th/ja/vp-sim.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.realbkk.com/ja/ja/vp-sim.html"/>
+  </url>
 </urlset>
